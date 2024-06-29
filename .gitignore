@@ -127,3 +127,7 @@ dist
 .pnp.*
 .DS_Store
 package-lock.json
+
+## Database
+Database
+app/src/config/ormconfig.ts

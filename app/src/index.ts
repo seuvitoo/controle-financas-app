@@ -1,23 +1,20 @@
 import express from 'express';
 import { json } from 'body-parser';
-import { createConnection } from 'typeorm';
-import { getConnectionOptions } from 'typeorm';
+import { AppDataSource } from './config/ormconfig';
+import { lancamentosRoutes } from './routes/lancamentosRoutes';
 
 const app = express();
 app.use(json());
 
 const startServer = async () => {
   try {
-    const connectionOptions = await getConnectionOptions();
-    await createConnection({ ...connectionOptions });
-    console.log('Connected to the database');
+    await AppDataSource.initialize();
+    console.log('Connected to the SQLite database');
   } catch (error) {
     console.error('Error connecting to the database', error);
   }
 
-  app.get('/', (req, res) => {
-    res.send('Controle de Finanças API');
-  });
+  app.use('/api', lancamentosRoutes);
 
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
