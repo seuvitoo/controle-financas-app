@@ -1,14 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 
 @Entity()
 export class Lancamentos extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('decimal')
+  @Column("decimal")
   valor: number;
 
-  @Column('date')
+  @Column("date")
   dataRealizada: Date;
 
   @Column()
@@ -20,6 +20,6 @@ export class Lancamentos extends BaseEntity {
   @Column()
   classificacao: string;
 
-  @Column('text', { nullable: true })
+  @Column("text", { nullable: true })
   observacao: string;
 }

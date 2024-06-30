@@ -1,7 +1,10 @@
 import { Router } from 'express';
 import { Lancamentos } from '../models/Lancamentos';
+import { authMiddleware } from '../middleware/authMiddleware';
+
 
 const router = Router();
+router.use(authMiddleware);
 
 // Obter todos os lançamentos
 router.get('/lancamentos', async (req, res) => {

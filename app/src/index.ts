@@ -2,6 +2,7 @@ import express from 'express';
 import { json } from 'body-parser';
 import { AppDataSource } from './config/ormconfig';
 import { lancamentosRoutes } from './routes/lancamentosRoutes';
+import { authRoutes } from './routes/authRoutes';
 
 const app = express();
 app.use(json());
@@ -15,6 +16,7 @@ const startServer = async () => {
   }
 
   app.use('/api', lancamentosRoutes);
+  app.use('/auth', authRoutes);
 
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
