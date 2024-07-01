@@ -1,5 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, BeforeInsert } from 'typeorm';
-import * as bcrypt from 'bcryptjs';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  BeforeInsert,
+  OneToMany,
+} from "typeorm";
+import * as bcrypt from "bcryptjs";
+import { Transaction } from "./Transaction";
 
 @Entity()
 export class User extends BaseEntity {
@@ -7,17 +15,26 @@ export class User extends BaseEntity {
   id: number;
 
   @Column()
-  username: string;
+  nome: string;
 
   @Column()
-  password: string;
+  email: string;
+
+  @Column()
+  senha: string;
+
+  @Column()
+  data_criacao: Date;
+
+  @OneToMany(() => Transaction, (transaction) => transaction.usuario)
+  transactions: Transaction[];
 
   @BeforeInsert()
   async hashPassword() {
-    this.password = await bcrypt.hash(this.password, 10);
+    this.senha = await bcrypt.hash(this.senha, 10);
   }
 
-  async comparePassword(password: string) {
-    return await bcrypt.compare(password, this.password);
+  async comparePassword(senha: string) {
+    return await bcrypt.compare(senha, this.senha);
   }
 }
