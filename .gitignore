@@ -130,4 +130,3 @@ package-lock.json
 
 ## Database
 Database
-app/src/config/ormconfig.ts
