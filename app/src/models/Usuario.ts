@@ -7,10 +7,11 @@ import {
   OneToMany,
 } from "typeorm";
 import * as bcrypt from "bcryptjs";
-import { Transaction } from "./Transaction";
+import { Renda } from "./Renda";
+import { Transacao } from "./Transacao";
 
 @Entity()
-export class User extends BaseEntity {
+export class Usuario extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -23,18 +24,21 @@ export class User extends BaseEntity {
   @Column()
   senha: string;
 
-  @Column()
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   data_criacao: Date;
 
-  @OneToMany(() => Transaction, (transaction) => transaction.usuario)
-  transactions: Transaction[];
+  @OneToMany(() => Renda, (renda) => renda.usuario)
+  rendas: Renda[];
+
+  @OneToMany(() => Transacao, (transacao) => transacao.usuario)
+  transacoes: Transacao[];
 
   @BeforeInsert()
-  async hashPassword() {
+  async hashSenha() {
     this.senha = await bcrypt.hash(this.senha, 10);
   }
 
-  async comparePassword(senha: string) {
+  async compararSenha(senha: string) {
     return await bcrypt.compare(senha, this.senha);
   }
 }

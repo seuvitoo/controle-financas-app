@@ -1,34 +1,25 @@
 import express from "express";
 import { json } from "body-parser";
 import { AppDataSource } from "./config/ormconfig";
-import { initializePredefinedValues } from "./config/predefinedValues";
-import { userRoutes } from "./routes/userRoutes";
-import { classificacaoRoutes } from "./routes/classificacaoRoutes";
-import { flowRoutes } from "./routes/flowRoutes";
-import { transactionRoutes } from "./routes/transactionRoutes";
-import { budgetRoutes } from "./routes/budgetRoutes";
+import { usuarioRoutes } from "./routes/usuarioRoutes";
+import { rendaRoutes } from "./routes/rendaRoutes";
 
 const app = express();
 app.use(json());
 
 const startServer = async () => {
   try {
-    await AppDataSource.initialize();
-    console.log("Connected to the SQLite database");
-
-    await initializePredefinedValues();
-    console.log("Predefined values initialized");
-  } catch (error) {
-    console.error("Error connecting to the database", error);
+    await AppDataSource.initialize().then(() =>
+      console.log("Conexão com PostgreSQL via Docker bem-sucedida!")
+    );
+  } catch (err) {
+    console.error("Erro ao conectar ao banco:", err);
   }
 
-  app.use("/auth", userRoutes);
-  app.use("/api", classificacaoRoutes);
-  app.use("/api", flowRoutes);
-  app.use("/api", transactionRoutes);
-  app.use("/api", budgetRoutes);
+  app.use("/auth", usuarioRoutes);
+  app.use("/api", rendaRoutes);
 
-  const PORT = process.env.PORT || 3000;
+  const PORT = process.env.PORT ?? 3000;
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });

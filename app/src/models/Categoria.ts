@@ -2,12 +2,10 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  BaseEntity,
-  ManyToOne,
   OneToMany,
+  BaseEntity
 } from "typeorm";
-import { Classificacao } from "./Classificacao";
-import { Flow } from "./Flow";
+import { Transacao } from "./Transacao";
 
 @Entity()
 export class Categoria extends BaseEntity {
@@ -17,12 +15,9 @@ export class Categoria extends BaseEntity {
   @Column()
   nome: string;
 
-  @Column("decimal", { nullable: false })
+  @Column("decimal")
   percentual: number;
 
-  @ManyToOne(() => Classificacao, (classificacao) => classificacao.categorias)
-  classificacao: Classificacao;
-
-  @OneToMany(() => Flow, (flow) => flow.categoria)
-  flows: Flow[];
+  @OneToMany(() => Transacao, (transacao) => transacao.categoria)
+  transacoes: Transacao[];
 }

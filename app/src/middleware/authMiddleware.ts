@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import * as jwt from "jsonwebtoken";
-import { User } from "../models/User";
+import { Usuario } from "../models/Usuario";
 
 export const authMiddleware = async (
   req: Request,
@@ -17,13 +17,13 @@ export const authMiddleware = async (
 
   try {
     const decoded = jwt.verify(token, "secret") as { id: number };
-    const user = await User.findOneBy({ id: decoded.id });
+    const usuario = await Usuario.findOneBy({ id: decoded.id });
 
-    if (!user) {
+    if (!usuario) {
       return res.status(401).json({ message: "Usuário não encontrado" });
     }
 
-    (req as any).user = user;
+    (req as any).usuario = usuario;
     next();
   } catch (err) {
     return res.status(401).json({ message: "Token inválido" });
