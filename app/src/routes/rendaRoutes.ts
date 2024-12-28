@@ -6,19 +6,29 @@ import { authMiddleware } from "../middleware/authMiddleware";
 const rendaRepostory = AppDataSource.getRepository(Renda);
 
 const router = Router();
-router.use(authMiddleware);
+//router.use(authMiddleware);
 
 // Criar Renda
-router.post("/rendas", async (req, res) => {
-  const { usuarioId, valor, mes } = req.body;
+router.post("/rendas", authMiddleware, async (req, res) => {
+  const { valor, mes } = req.body;
 
   try {
+    const usuario = (req as any).usuario; // Obtém o usuário autenticado
+    if (!usuario) {
+      return res.status(401).json({ message: "Usuário não autenticado" });
+    }
+
     const renda = rendaRepostory.create({
-      usuario: { id: usuarioId },
+      usuario, // Vincula ao usuário autenticado
       valor,
       mes,
     });
-    await renda.save();
+
+    console.log("Valor: " + valor);
+    console.log("Mês: " + mes);
+    console.log("Usuário: " + usuario.nome);
+
+    await rendaRepostory.save(renda);
     res.status(201).json(renda);
   } catch (error) {
     res.status(500).json({ message: "Erro ao criar renda", error });

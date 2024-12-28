@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import * as jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { Usuario } from "../models/Usuario";
 
 export const authMiddleware = async (
@@ -23,7 +23,7 @@ export const authMiddleware = async (
       return res.status(401).json({ message: "Usuário não encontrado" });
     }
 
-    (req as any).usuario = usuario;
+    (req as any).usuario = usuario; // Adiciona o usuário autenticado ao req
     next();
   } catch (err) {
     return res.status(401).json({ message: "Token inválido" });
