@@ -1,0 +1,292 @@
+_type: export
+__export_format: 4
+__export_date: 2024-12-28T02:44:58.272Z
+__export_source: insomnia.desktop.app:v10.3.0
+resources:
+  - _id: req_500d02edc83e4ca7871e780c91980f77
+    parentId: fld_6f052f4d3152433a904d7cc8791d0536
+    modified: 1735352802104
+    created: 1735351367177
+    url: "{{ _.localhost }}/v1/rendas"
+    name: cadastrar renda
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "usuarioId": 1,
+          "valor": 5000.0,
+          "mes": "2024-01-01"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/10.3.0
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_fc5efbe8fd5148f78d00b7444f955541',
+        'b64::JC50b2tlbg==::46b', 'when-expired', 60 %}"
+    metaSortKey: -1735351367177
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_6f052f4d3152433a904d7cc8791d0536
+    parentId: wrk_1edc5bcf51d14607b89bba51b34e1f7b
+    modified: 1735350674524
+    created: 1735350674524
+    name: renda
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1735350674524
+    environmentType: kv
+    _type: request_group
+  - _id: wrk_1edc5bcf51d14607b89bba51b34e1f7b
+    parentId: null
+    modified: 1735350571115
+    created: 1735350560966
+    name: controle-financas
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_c009efdaa9954011ab9315c863709bb8
+    parentId: fld_6f052f4d3152433a904d7cc8791d0536
+    modified: 1735353780663
+    created: 1735351851778
+    url: "{{ _.localhost }}/v1/rendas?usuarioId=1"
+    name: buscar renda
+    description: ""
+    method: GET
+    body: {}
+    parameters:
+      - id: pair_ad30c51bb1a74c1e99c063840113083d
+        name: usuarioId
+        value: "1"
+        description: ""
+        disabled: true
+    headers:
+      - name: User-Agent
+        value: insomnia/10.3.0
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_fc5efbe8fd5148f78d00b7444f955541',
+        'b64::JC50b2tlbg==::46b', 'when-expired', 60 %}"
+      prefix: Bearer
+    metaSortKey: -1735351035784
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d3118265d7c84d439877696f220de3cf
+    parentId: fld_6f052f4d3152433a904d7cc8791d0536
+    modified: 1735352625983
+    created: 1735352568009
+    url: "{{ _.localhost }}/v1/rendas/1"
+    name: atualizar renda
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"valor": 6000.0
+        }
+    parameters:
+      - id: pair_ad30c51bb1a74c1e99c063840113083d
+        name: usuarioId
+        value: "1"
+        description: ""
+        disabled: true
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/10.3.0
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_fc5efbe8fd5148f78d00b7444f955541',
+        'b64::JC50b2tlbg==::46b', 'when-expired', 60 %}"
+      prefix: Bearer
+    metaSortKey: -1735350870087.5
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_bffd51ee05584886b12595f6bb6648d2
+    parentId: fld_9ab7ca12b1474b9ba7b324fde2eeb27e
+    modified: 1735353652871
+    created: 1735353022394
+    url: "{{ _.localhost }}/v1/transacao"
+    name: cadastrar transacao
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"valor": 150.0,
+        	"tipo": "despesa",
+        	"descricao": "Supermercado atualizado",
+        	"data": "2024-01-02",
+        	"categoriaId": 1
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/10.3.0
+    authentication:
+      type: bearer
+      token: "{{ _.Token }}"
+      prefix: Beaerer
+    metaSortKey: -1735353022394
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_9ab7ca12b1474b9ba7b324fde2eeb27e
+    parentId: wrk_1edc5bcf51d14607b89bba51b34e1f7b
+    modified: 1735350670758
+    created: 1735350670758
+    name: transacao
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1735350670758
+    environmentType: kv
+    _type: request_group
+  - _id: req_ce5e314366ba45a682a824a16d046245
+    parentId: fld_49d5a1178c7a48d0be2d165b72690ad1
+    modified: 1735351280146
+    created: 1735350704391
+    url: "{{ _.localhost }}/v1/registro"
+    name: registrar usuario
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"nome": "João da Silva",
+        	"email": "joao@email.com",
+        	"senha": "123456"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/10.3.0
+    authentication: {}
+    metaSortKey: -1735350704391
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_49d5a1178c7a48d0be2d165b72690ad1
+    parentId: wrk_1edc5bcf51d14607b89bba51b34e1f7b
+    modified: 1735350665990
+    created: 1735350665990
+    name: usuario
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1735350665990
+    environmentType: kv
+    _type: request_group
+  - _id: req_fc5efbe8fd5148f78d00b7444f955541
+    parentId: fld_49d5a1178c7a48d0be2d165b72690ad1
+    modified: 1735351320109
+    created: 1735351290753
+    url: "{{ _.localhost }}/v1/login"
+    name: login
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "joao@email.com",
+        	"senha": "123456"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/10.3.0
+    authentication: {}
+    metaSortKey: -1727571484915.5
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_e4f48105f6d1ff170eb87dbbf3284629c1f422f0
+    parentId: wrk_1edc5bcf51d14607b89bba51b34e1f7b
+    modified: 1735353117862
+    created: 1735350571725
+    name: Base Environment
+    data:
+      localhost: http://localhost:3000
+      Token: "{% response 'body', 'req_fc5efbe8fd5148f78d00b7444f955541',
+        'b64::JC50b2tlbg==::46b', 'when-expired', 60 %}"
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1735350571725
+    environmentType: kv
+    kvPairData:
+      - id: envPair_954824573d2b4aa880dc5d1cb22f1e98
+        name: localhost
+        value: http://localhost:3000
+        type: str
+        enabled: true
+      - id: envPair_d159818a4d4e44b8814647556656b045
+        name: Token
+        value: "{% response 'body', 'req_fc5efbe8fd5148f78d00b7444f955541',
+          'b64::JC50b2tlbg==::46b', 'when-expired', 60 %}"
+        type: str
+        enabled: true
+    _type: environment
+  - _id: jar_e4f48105f6d1ff170eb87dbbf3284629c1f422f0
+    parentId: wrk_1edc5bcf51d14607b89bba51b34e1f7b
+    modified: 1735350571738
+    created: 1735350571738
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar

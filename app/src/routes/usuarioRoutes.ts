@@ -6,13 +6,24 @@ import { AppDataSource } from "../config/ormconfig";
 const router = Router();
 
 const userRepository = AppDataSource.getRepository(Usuario);
-router.post("/register", async (req, res) => {
 
+router.post("/registro", async (req, res) => {
   const { nome, email, senha } = req.body;
-  const usuario = userRepository.create({ nome, email, senha, data_criacao: new Date() });
-  
-  await usuario.save();
-  res.status(201).json(usuario);
+
+  try {
+    const usuario = userRepository.create({
+      nome,
+      email,
+      senha,
+      data_criacao: new Date(),
+    });
+    await usuario.save();
+    res
+      .status(201)
+      .json({ id: usuario.id, message: "Usuário criado com sucesso" });
+  } catch (error) {
+    res.status(500).json({ message: "Erro ao registrar usuário", error });
+  }
 });
 
 router.post("/login", async (req, res) => {
